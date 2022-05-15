@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Register from './components/register';
+import Login from './components/login';
+import Profile from './components/profile';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
+
+const App = () => {
+
+  if(!localStorage.getItem("loginView") && !localStorage.getItem("id"))
+    return <Register />
+  else if(localStorage.getItem("loginView"))
+    return <Login />
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <div>
+      {/* <BrowserRouter>
+        <Routes>
+          <Route  path="/" exact component={ Register } />
+          <Route  path="/login" exact component={ Login } />
+          <Route  path="/info" exact component={ Profile } />
+        </Routes>
+      </BrowserRouter> */}
+      <Profile />
+    </div> 
+  )
 }
 
 export default App;
